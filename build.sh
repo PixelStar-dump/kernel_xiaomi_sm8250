@@ -27,7 +27,7 @@ fi
 
 DEVICE=$2
 
-VERSION=BETA
+VERSION=ALTAIR
 if [ "${DEVICE}" = "alioth" ]; then
 DEFCONFIG=alioth_defconfig
 MODEL="Poco F3"
@@ -66,12 +66,12 @@ KERVER=$(make kernelversion)
 COMMIT_HEAD=$(git log --oneline -1)
 
 # Date and Time
-DATE=$(TZ=Europe/Lisbon date +"%Y%m%d-%T")
+DATE=$(TZ=Asia/Kolkata date +"%Y%m%d-%T")
 TM=$(date +"%F%S")
 
 # Specify Final Zip Name
-ZIPNAME=Star-Kernel
-FINAL_ZIP=${ZIPNAME}-${VERSION}-${DEVICE}-BETA-2-${TM}.zip
+ZIPNAME=Star-Kernel-Altair
+FINAL_ZIP=${ZIPNAME}-${VERSION}-${DEVICE}-${TM}.zip
 
 # Specify compiler [ proton, nexus, aosp ]
 COMPILER=aosp
@@ -388,11 +388,11 @@ END=$(date +"%s")
 DIFF=$(($END - $START))
 move
 # KernelSU
-echo "CONFIG_KSU=y" >> $(pwd)/arch/arm64/configs/$DEFCONFIG
-compile_ksu
-move_ksu
+# echo "CONFIG_KSU=y" >> $(pwd)/arch/arm64/configs/$DEFCONFIG
+# compile_ksu
+# move_ksu
 zipping
-if [ "$BUILD" = "local" ]; then
+# if [ "$BUILD" = "local" ]; then
 # Discard KSU changes in defconfig
-git restore arch/arm64/configs/$DEFCONFIGf
-fi
+# git restore arch/arm64/configs/$DEFCONFIGf
+# fi
